@@ -19,3 +19,6 @@ Build dist (e.g. for production) with `yarn build`
     - I've been trying to use Apollo Client with graphql subscriptions from Rails ActionCable in a separate project but it's not quite working. Apparently there might be some websockets handling mismatch so it would be nice to try Apollo server instead on that project (not wedded to ruby as it's early days)
 - It would be nice to use top level awaits with `"type": "module"` in package.json but this is breaking imports as node requires file extensions. As we are transpiling for production from Typescript we would need to write something custom to get `import X from 'x.ts'` transpiled to `import X from 'x.js'`. This needs a bit more thought 
 
+##TODO
+- Generate types from schema - started this process before just creating the Project interface manually but reset. See here: https://www.apollographql.com/docs/apollo-server/workflow/generate-types/
+

@@ -1,30 +1,22 @@
-const typeDefs = `#graphql
+import { readFileSync } from 'fs';
 
-  type Book {
-    title: String
-    author: String
-  }
+const typeDefs = readFileSync('./src/graphql/schema.graphql', { encoding: 'utf-8' });
 
-  type Query {
-    books: [Book]
-  }
-`;
+//It should be possible to auto generate this from the schema https://www.apollographql.com/docs/apollo-server/workflow/generate-types/
+interface Project {
+  id: string;
+  url: string;
+  status: string;
+  country: string;
+}
 
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
-  },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
+const projects: Project[] = [
 ];
 
-// This resolver retrieves books from the "books" array above.
+// This resolver retrieves projects from the "projects" array above.
 const resolvers = {
   Query: {
-    books: () => books,
+    projects: (): Project[] => projects,
   },
 };
 
