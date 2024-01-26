@@ -1,4 +1,7 @@
 ##Getting Started Docker
+
+NOTE: node_modules is not shared with the container (as a quick way to avoid potential permissions issues). Make sure yarn install is run in the container if you make any changes (it will run automatically when the container is first built)
+
 You will need docker compose and docker installed
 
 Start the project with `docker compose up -d` to start detached
