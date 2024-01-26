@@ -12,6 +12,11 @@ const resolvers = {
       //Get the projects repository from the db
       const projectsRepository = db.getRepository(Project);
       return await projectsRepository.findAll();
+    },
+    project: async (_: any, { id }: any, { db }: MyContext): Promise<Project | null> => {
+      //Get the projects repository from the db
+      const projectsRepository = db.getRepository(Project);
+      return await projectsRepository.findByPk(id);
     }
   },
 };

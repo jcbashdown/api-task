@@ -20,6 +20,9 @@ const config: Config = {
 };
 
 //Not working with sequelize cli
+//Discovered when playing with migrations in another project
+//Using the working approach here in case we need migrations later
 //export default config;
 
+//This works instead
 export = config;
