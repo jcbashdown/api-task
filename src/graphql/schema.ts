@@ -1,30 +1,23 @@
-const typeDefs = `#graphql
+import { readFileSync } from 'fs';
 
-  type Book {
-    title: String
-    author: String
-  }
+import { MyContext } from '../index';
+import Project from '../models/Project';
 
-  type Query {
-    books: [Book]
-  }
-`;
+const typeDefs = readFileSync('./src/graphql/schema.graphql', { encoding: 'utf-8' });
 
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
-  },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
-];
-
-// This resolver retrieves books from the "books" array above.
+// This resolver retrieves projects from the "projects" array above.
 const resolvers = {
   Query: {
-    books: () => books,
+    projects: async (_: any, __: any, { db }: MyContext): Promise<Project[]> => {
+      //Get the projects repository from the db
+      const projectsRepository = db.getRepository(Project);
+      return await projectsRepository.findAll();
+    },
+    project: async (_: any, { id }: any, { db }: MyContext): Promise<Project | null> => {
+      //Get the projects repository from the db
+      const projectsRepository = db.getRepository(Project);
+      return await projectsRepository.findByPk(id);
+    }
   },
 };
 

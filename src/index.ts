@@ -4,11 +4,14 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
+import { Sequelize } from 'sequelize-typescript'
 
+import { sequelize, authenticateDatabase } from './sequelize';
 import { typeDefs, resolvers } from './graphql/schema';
 
-interface MyContext {
+export interface MyContext {
   token?: string;
+  db: Sequelize;
 }
 
 async function startServer() {
@@ -31,6 +34,7 @@ async function startServer() {
         expressMiddleware(server, {
             context: async ({ req }) => ({ 
               token: req.headers.token as string | undefined,
+              db: sequelize
             }),
         }),
     );

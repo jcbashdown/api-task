@@ -1,0 +1,11 @@
+type Project {
+  id: String!
+  url: String
+  status: String
+  country: String
+}
+
+type Query {
+  projects: [Project]
+  project(id: String!): Project
+}
