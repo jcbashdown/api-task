@@ -1,5 +1,5 @@
 import { SequelizeOptions } from 'sequelize-typescript';
-import { Project } from '../models/Project';
+import Project from '../models/Project';
 
 type Config = {
   [env: string]: SequelizeOptions;
@@ -7,7 +7,7 @@ type Config = {
 
 const sequelizeOptions: SequelizeOptions = {
   dialect: 'sqlite',
-  storage: './database.sqlite',
+  storage: './sylvera-programming-task.db',
   models: [Project], // Array of model classes
 };
 

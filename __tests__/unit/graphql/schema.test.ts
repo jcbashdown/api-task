@@ -1,7 +1,35 @@
 import { typeDefs, resolvers } from '../../../src/graphql/schema';
 import { ApolloServer } from '@apollo/server';
 
-let testServer: ApolloServer;
+interface TestContext {
+  db: any;
+}
+
+let testServer: ApolloServer<TestContext>;
+
+// Create a mock for ProjectRepository 
+const mockProjectRepository = {
+  findAll: jest.fn().mockResolvedValue([
+      {
+        id: 'abcdef',
+        url: 'https://en.wikipedia.org/wiki/The_Awakening',
+        status: 'published',
+        country: 'USA'
+      },
+      {
+        id: 'abc123',
+        url: 'https://en.wikipedia.org/wiki/The_Awakening_(novel)',
+        status: 'published',
+        country: 'USA'
+      }
+    ])
+};
+// Mock context with db.getRepository
+const mockContext = {
+  db: {
+    getRepository: jest.fn().mockReturnValue(mockProjectRepository)
+  }
+};
 
 // Initialize the ApolloServer before any tests run
 beforeAll(() => {
@@ -26,9 +54,13 @@ it('returns a list of projects', async () => {
   `;
 
   // Execute the query
-  const response = await testServer.executeOperation({
-    query: GET_PROJECTS
-  })
+  const response = await testServer.executeOperation(
+    {
+      query: GET_PROJECTS,
+    }, {
+      contextValue: mockContext
+    }
+  )
 
   expect(response.body.kind === 'single');
   //This if prevents a Typescript error. It would be better to use `as` to assert the type of the response
@@ -73,9 +105,13 @@ it('returns a list of projects titles when only asked for titles', async () => {
   `;
 
   // Execute the query
-  const response = await testServer.executeOperation({
-    query: GET_PROJECTS
-  })
+  const response = await testServer.executeOperation(
+    {
+      query: GET_PROJECTS,
+    }, {
+      contextValue: mockContext
+    }
+  )
 
   expect(response.body.kind === 'single');
   //This if prevents a Typescript error. It would be better to use `as` to assert the type of the response

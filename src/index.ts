@@ -9,7 +9,7 @@ import { Sequelize } from 'sequelize-typescript'
 import { sequelize, authenticateDatabase } from './sequelize';
 import { typeDefs, resolvers } from './graphql/schema';
 
-interface MyContext {
+export interface MyContext {
   token?: string;
   db: Sequelize;
 }

@@ -7,8 +7,8 @@ import {
   DataType
 } from 'sequelize-typescript';
 
-@Table
-export class Project extends Model<Project> {
+@Table({timestamps: false})
+export default class Project extends Model<Project> {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
