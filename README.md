@@ -41,13 +41,26 @@ Build dist (e.g. for production) with `yarn build`
 - While express is appropriate for a project like this, I think in a team I might prefer a more full featured framework with strong conventions. It would be easy end up with quite a messy code base without this.
 
 ## TODO
+- Linting (and other static analysis?) based on team standards
 - Allow filtering by attributes as an option in the projects query
 - Add Auth
+    - Granular permissions?
 - Versioning less of an issue with graphql - deprecatable fields, more granular queries. Probably leave this for now.
 - Consider error handling
 - Consider documentation beyond schema itself and sandbox/playground/graphiql - descriptions with "" - https://graphql.com/learn/schema/?
+- Generate types from schema - started this process before just creating the Project interface manually but reset. See here: https://www.apollographql.com/docs/apollo-server/workflow/generate-types/
+
+### TODO - extra functionality beyond the brief
 - Create a mutation
 - Do some queries with nested types?
 - Split up the tests on a per query basis?
-- Generate types from schema - started this process before just creating the Project interface manually but reset. See here: https://www.apollographql.com/docs/apollo-server/workflow/generate-types/
+- Add some extra tables and fields after setting up migration infrastructure
+- Consider realtime data + think about using graphql subscriptions?
+
+### TODO Later
+- CI/CD
+- Use postgres
+    - Extra docker container
+- Switch to config in .env
+- Consider data sources apart from sqlite/postgres. More than one DB? Other systems?
 
