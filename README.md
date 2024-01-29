@@ -10,7 +10,20 @@ Start the project with `docker compose up -d` to start detached
 - `yarn install` should run but you will need to run `yarn docker-yarn-install` for future updates
 - shutdown when detached with `docker compose down`
 
-Visit the graphql sandbox at localhost:4000
+Visit the graphql sandbox at [localhost:4000]
+
+Example Query:
+
+```
+query {
+  projects {
+    country
+    id
+    status
+    url
+  }
+}
+```
 
 Run tests with `yarn docker-test`
 
